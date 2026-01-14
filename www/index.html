@@ -55,16 +55,21 @@ function updateCharacterCount(inputId, counterId, maxLength) {
     const input = $(`#${inputId}`);
     const counter = $(`#${counterId}`);
 
+    input.off('input');
+
     input.on('input', () => {
         const length = input.val().length;
-        counter.text(`${length}/${maxLength}`);
+        const remaining = maxLength - length;
+        counter.text(`残り ${remaining} 文字`);
 
-        if (length > maxLength) {
+        if (remaining < 0) {
             counter.addClass('error');
         } else {
             counter.removeClass('error');
         }
     });
+        const remaining = maxLength - input.val().length;
+        counter.text(`残り ${remaining} 文字`);
 }
 
 // 入力値のバリデーション
@@ -138,7 +143,7 @@ function createPost(author, content) {
         showMessage('投稿が完了しました！');
         $('#authorInput').val('');
         $('#contentInput').val('');
-        updateCharacterCount('authorInput', 'authorCount', 20);
+        //updateCharacterCount('authorInput', 'authorCount', 20);
         updateCharacterCount('contentInput', 'contentCount', 1000);
     })
     .catch((error) => {
@@ -552,7 +557,7 @@ window.addEventListener('unload', () => {
 </head>
 <body>
     <div class="container">
-        
+
         <div class="theme-buttons">
             <button onclick="setTheme('light')">白</button>
             <button onclick="setTheme('dark')">黒</button>
@@ -598,7 +603,7 @@ window.addEventListener('unload', () => {
                 <label for="authorInput">お名前</label>
                 <input type="text" id="authorInput"
                        class="form-control" placeholder="お名前を入力してください">
-                <small class="character-count" id="authorCount">0/20</small>
+                <small class="character-count" id="authorCount"></small>
 
           
 
@@ -607,7 +612,7 @@ window.addEventListener('unload', () => {
                 <label for="contentInput">投稿内容</label>
                 <textarea id="contentInput" class="form-control"
                           placeholder="投稿内容を入力してください"></textarea>
-                <small class="character-count" id="contentCount">0/1000</small>
+                <small class="character-count" id="contentCount"></small>
             </div>
             <div class="button-group">
                 <button id="postButton" class="btn-primary">投稿する</button>
@@ -642,7 +647,7 @@ window.addEventListener('unload', () => {
             <div class="modal-body">
                 <div class="form-group">
                     <textarea id="editContent" class="form-control"></textarea>
-                    <small class="character-count" id="editContentCount">0/1000</small>
+                    <small class="character-count" id="editContentCount"></small>
                 </div>
             </div>
             <div class="modal-footer">
