@@ -507,3 +507,50 @@ textarea.form-control {
 .logged-out {
     display: none;
 }
+
+/* ===== テーマ切り替え ===== */
+
+/* 白テーマ（デフォルト） */
+.theme-light {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* 黒テーマ */
+.theme-dark {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+.theme-dark .post,
+.theme-dark .post-form,
+.theme-dark .auth-container,
+.theme-dark .user-info,
+.theme-dark .modal-content {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+}
+
+.theme-dark input,
+.theme-dark textarea,
+.theme-dark select {
+    background-color: #2a2a2a;
+    color: #f1f1f1;
+    border-color: #555;
+}
+
+/* 青テーマ */
+.theme-blue {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+.theme-blue .post,
+.theme-blue .post-form,
+.theme-blue .auth-container,
+.theme-blue .user-info,
+.theme-blue .modal-content {
+    background-color: #ffffff;
+    border-left: 6px solid #2196f3;
+}
+

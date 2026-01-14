@@ -172,6 +172,21 @@ function formatTimestamp(timestamp) {
     });
 }
 
+function setTheme(theme) {
+    document.body.className = `theme-${theme}`;
+    localStorage.setItem('theme', theme);
+}
+
+$(function () {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    }
+});
+
+
+
+
 // 投稿の編集権限チェック
 function canEditPost(post) {
     return currentUser && post.userId === currentUser.uid;
@@ -532,9 +547,20 @@ window.addEventListener('unload', () => {
     }
 });
     </script>
+
+
 </head>
 <body>
     <div class="container">
+        
+        <div class="theme-buttons">
+            <button onclick="setTheme('light')">白</button>
+            <button onclick="setTheme('dark')">黒</button>
+            <button onclick="setTheme('blue')">青</button>
+        </div>
+        
+
+ 
         <h1>掲示板アプリ</h1>
 
         <!-- メッセージ表示エリア -->
