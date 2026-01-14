@@ -165,6 +165,19 @@ function escapeHtml(str) {
         .replace(/'/g, '&#039;');
 }
 
+function formatRelativeTime(timestamp) {
+    const diff = Date.now() - timestamp;
+    const sec = Math.floor(diff / 1000);
+    const min = Math.floor(sec / 60);
+    const hour = Math.floor(min / 60);
+    const day = Math.floor(hour / 24);
+
+    if (sec < 60) return `${sec}秒前`;
+    if (min < 60) return `${min}分前`;
+    if (hour < 24) return `${hour}時間前`;
+    return `${day}日前`;
+}
+
 // タイムスタンプのフォーマット
 function formatTimestamp(timestamp) {
     const date = new Date(timestamp);
@@ -235,11 +248,11 @@ function createPostElement(post) {
             </div>
             <div class="post-footer">
                 <span class="post-time">
-                    ${formatTimestamp(post.timestamp)}
+                    ${formatRelativeTime(post.timestamp)}
                 </span>
                 ${post.updatedAt ? `
                     <span class="post-updated">
-                        (編集済み: ${formatTimestamp(post.updatedAt)})
+                        (編集済み: ${formatRelativeTime(post.updatedAt)})
                     </span>
                 ` : ''}
             </div>
